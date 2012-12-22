@@ -123,16 +123,10 @@
   CGRect extent = [inputImage extent];
   CGSize inputImageSize = extent.size;
   
-  CGFloat targetAspectRation = [self size].width / [self size].height;
-  CGFloat inputAspectRation = inputImageSize.width / inputImageSize.height;
-  CGFloat scaleFactor;
-  
-  if (inputAspectRation > targetAspectRation) {
-    scaleFactor = inputImageSize.height / [self size].height;
-  } else {
-    scaleFactor = inputImageSize.width / [self size].width;
-  }
-
+  CGFloat yScale = (CGFloat)([self size].height / inputImageSize.height);
+  CGFloat xScale = (CGFloat)(inputImageSize.width / [self size].width); 
+  CGFloat scaleFactor = (CGFloat)fminf(yScale, xScale);
+ 
   CIFilter *scaleFilter = [CIFilter filterWithName:@"CILanczosScaleTransform"];
 	[scaleFilter setDefaults];
 	[scaleFilter setValue:inputImage forKey:@"inputImage"];
@@ -146,7 +140,7 @@
 {
     CIImage * ciImage = [self applyFiltersForImageBuffer:currentImage];
     NSCIImageRep *imageRep = [NSCIImageRep imageRepWithCIImage:ciImage];
-  
+    
     NSImage * imageCam = [[NSImage alloc] initWithSize:[imageRep size]];
     [imageCam addRepresentation:imageRep];
     

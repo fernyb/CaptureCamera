@@ -6,7 +6,8 @@ int main() {
   
   CapturePhoto * camera = [[CapturePhoto alloc] init];
   [camera setFilename:@"~/Desktop/screen.jpg"];
-  [camera setSize:CGSizeMake(640,480)];
+  //[camera setSize:CGSizeMake(640,480)];
+  [camera setSize:CGSizeMake(200,200)];
   
   [camera begin];
   [camera release];

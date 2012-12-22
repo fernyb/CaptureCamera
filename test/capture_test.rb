@@ -5,5 +5,8 @@ include Capture
 dir = "~/Desktop"
 photo_name = "capture_test"
 
+# take_photo :filename => "#{dir}/#{photo_name}.jpg", 
+#            :size     => [640,480]
+
 take_photo :filename => "#{dir}/#{photo_name}.jpg", 
-           :size     => [640,480]
+           :size     => [200,200]
